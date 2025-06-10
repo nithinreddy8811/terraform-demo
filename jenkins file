@@ -3,7 +3,7 @@ pipeline {
     // IMPORTANT: Add the 'tools' block here to tell Jenkins to use your configured Terraform installation
     tools {
         // 'terraform-usr' should match the 'Name' you gave in "Manage Jenkins > Global Tool Configuration"
-        terraform 'terraform-usr'
+        terraform 'terraform'
     }
     stages {
         stage('Checkout Code') {
@@ -51,34 +51,7 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            cleanWs() // Clean up the Jenkins workspace after every build
-        }
-        success {
-            echo 'local_file Terraform pipeline completed successfully!'
-            // Ensure Slack plugin is installed and configured (Manage Jenkins -> Configure System -> Slack)
-            // 'slack-token' must be a Secret Text credential in Jenkins.
-            slackSend(
-                channel: '#team', // Recommended a dedicated channel for alerts
-                color: 'good',
-                message: "SUCCESS: Terraform pipeline for ${env.JOB_NAME} build ${env.BUILD_NUMBER} completed successfully!" +
-                         "\nJenkins URL: ${env.BUILD_URL}",
-                tokenCredentialId: 'slack-token'
-            )
-        }
-        failure {
-            echo 'local_file Terraform pipeline failed!'
-            slackSend(
-                channel: '#team', // Recommended a dedicated channel for alerts
-                color: 'danger',
-                message: "FAILURE: Terraform pipeline for ${env.JOB_NAME} build ${env.BUILD_NUMBER} failed!" +
-                         "\nJenkins URL: ${env.BUILD_URL}",
-                tokenCredentialId: 'slack-token'
-            )
-        }
-    }
-}
+  }
 
 
 
