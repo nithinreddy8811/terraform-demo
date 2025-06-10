@@ -1,9 +1,8 @@
-resource "local_file" "my_pet" {
-filename = "pets.txt"
-content = "we love pets!"
+resource "local_file" "my_text_file" {
+  filename = "pets.txt"
+  content = "I love my dog"
 }
-resource "random_pet" "mypet" {
-prefix = "MR"
-separator = "."
-length = "1"
+output "local_file_path" {
+  value = local_file.my_text_file.filename
+  description = "The path to the local file"
 }
