@@ -10,7 +10,7 @@ pipeline {
             steps {
                 // Ensure the 'github-manikiran7-pat' credential is configured in Jenkins.
                 // Double-check the branch name: 'main' vs. 'master' based on your repo's default branch.
-                git branch: 'main', credentialsId: 'github-manikiran7-pat', url: 'https://github.com/nithinreddy8811/terraform-demo.git'
+                git branch: 'main', credentialsId: 'terraform-token', url: 'https://github.com/nithinreddy8811/terraform-demo.git'
             }
         }
         stage('Terraform Init') {
