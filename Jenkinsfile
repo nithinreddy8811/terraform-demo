@@ -3,9 +3,6 @@ pipeline {
     tools {
         terraform 'terraform' // Ensure Terraform is configured under "Manage Jenkins > Global Tool Configuration"
     }
-    environment {
-        TF_CLI_ARGS = "-auto-approve"
-    }
     stages {
         stage('Checkout Code') {
             steps {
